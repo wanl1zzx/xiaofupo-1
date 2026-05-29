@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小芙蔢 - 分层代谢 养出亮白素颜肌</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #C8956C;
+            --primary-light: #E8CDB5;
+            --primary-dark: #A0704A;
+            --bg-cream: #FDF8F3;
+            --bg-warm: #F9F0E8;
+            --text-dark: #2C2420;
+            --text-body: #5A4E47;
+            --text-light: #8C7E75;
+            --white: #FFFFFF;
+            --border: #E8DDD5;
+            --shadow: rgba(200, 149, 108, 0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-body);
+            background: var(--bg-cream);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* ===== 导航栏 ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+
+        .navbar.scrolled {
+            background: rgba(253, 248, 243, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 30px var(--shadow);
+            padding: 0.7rem 2rem;
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .navbar.scrolled .nav-logo {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255,255,255,0.85);
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .navbar.scrolled .nav-links a {
+            color: var(--text-body);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 0.5rem 1.5rem;
+            background: var(--primary);
+            color: var(--white) !important;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        /* ===== Hero 区域 ===== */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #3D2B1F 0%, #5C3D2E 40%, #7A5040 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(200,149,108,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(200,149,108,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.4rem 1.5rem;
+            border: 1px solid rgba(200,149,108,0.5);
+            border-radius: 50px;
+            color: var(--primary-light);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 3.8rem;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.7);
+            font-weight: 300;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .btn-primary {
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(200,149,108,0.4);
+        }
+
+        .btn-outline {
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: var(--white);
+            border: 1.5px solid rgba(255,255,255,0.4);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary-light);
+            color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.5);
+            font-size: 0.8rem;
+            text-align: center;
+            animation: bounce 2s infinite;
+            z-index: 2;
+        }
+
+        .hero-scroll .arrow {
+            display: block;
+            width: 20px;
+            height: 20px;
+            border-right: 2px solid rgba(255,255,255,0.4);
+            border-bottom: 2px solid rgba(255,255,255,0.4);
+            transform: rotate(45deg);
+            margin: 0.5rem auto 0;
+        }
+
+        /* ===== 通用区块样式 ===== */
+        .section {
+            padding: 6rem 2rem;
+        }
+
+        .section-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-tag {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        /* ===== 品牌理念 ===== */
+        .philosophy {
+            background: var(--white);
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .philo-card {
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            background: var(--bg-cream);
+            border: 1px solid var(--border);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .philo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--primary);
+            transition: height 0.4s;
+        }
+
+        .philo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px var(--shadow);
+        }
+
+        .philo-card:hover::before {
+            height: 100%;
+        }
+
+        .philo-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .philo-card h3 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 0.8rem;
+        }
+
+        .philo-card p {
+            font-size: 0.92rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* ===== 核心产品 ===== */
+        .products {
+            background: var(--bg-cream);
+        }
+
+        .product-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all 0.4s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px var(--shadow);
+        }
+
+        .product-visual {
+            height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-visual.quban {
+            background: linear-gradient(135deg, #F5E6D3, #E8CDB5, #D4A574);
+        }
+
+        .product-visual.dabaiji {
+            background: linear-gradient(135deg, #F0E4F7, #E0CDF0, #C8A8E0);
+        }
+
+        .product-visual-text {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.6);
+            z-index: 1;
+        }
+
+        .product-visual::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .product-info {
+            padding: 2rem;
+        }
+
+        .product-tag {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+        }
+
+        .product-info h3 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-info .tagline {
+            color: var(--primary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .product-info p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .product-features {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem;
+        }
+
+        .product-features li {
+            font-size: 0.85rem;
+            color: var(--text-body);
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .product-features li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 0.7rem;
+        }
+
+        .product-price {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .product-price span {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.3rem;
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .product-price a {
+            padding: 0.5rem 1.5rem;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .product-price a:hover {
+            background: var(--primary-dark);
+        }
+
+        /* ===== 技术优势 ===== */
+        .tech-section {
+            background: linear-gradient(135deg, #3D2B1F, #5C3D2E);
+            color: var(--white);
+        }
+
+        .tech-section .section-tag {
+            background: rgba(200,149,108,0.2);
+            color: var(--primary-light);
+        }
+
+        .tech-section .section-title {
+            color: var(--white);
+        }
+
+        .tech-section .section-desc {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .tech-item {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+
+        .tech-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-4px);
+        }
+
+        .tech-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .tech-label {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.9);
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        .tech-desc {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.5);
+            margin-top: 0.5rem;
+            line-height: 1.6;
+        }
+
+        /* ===== 对比区域 ===== */
+        .compare {
+            background: var(--white);
+        }
+
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 30px var(--shadow);
+        }
+
+        .compare-table thead {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+        }
+
+        .compare-table th {
+            padding: 1.2rem 1.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .compare-table th.highlight {
+            background: rgba(0,0,0,0.15);
+        }
+
+        .compare-table td {
+            padding: 1rem 1.5rem;
+            text-align: center;
+            font-size: 0.88rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .compare-table tr:nth-child(even) {
+            background: var(--bg-cream);
+        }
+
+        .compare-table td.highlight {
+            background: rgba(200,149,108,0.08);
+            color: var(--primary-dark);
+            font-weight: 500;
+        }
+
+        .compare-table td:first-child {
+            text-align: left;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        /* ===== 流程区域 ===== */
+        .process {
+            background: var(--bg-warm);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0;
+            position: relative;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 32px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-light), var(--primary), var(--primary-light));
+            z-index: 0;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-num {
+            width: 64px;
+            height: 64px;
+            background: var(--white);
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.2rem;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            transition: all 0.3s;
+        }
+
+        .step:hover .step-num {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .step h4 {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            margin-bottom: 0.4rem;
+        }
+
+        .step p {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            padding: 0 0.5rem;
+        }
+
+        /* ===== 创始人 ===== */
+        .founder {
+            background: var(--white);
+        }
+
+        .founder-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .founder-avatar {
+            width: 280px;
+            height: 350px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .founder-avatar::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.2), transparent 70%);
+            border-radius: 50%;
+            top: 10%;
+            right: -20%;
+        }
+
+        .founder-avatar-name {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .founder-avatar-title {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            margin-top: 0.3rem;
+        }
+
+        .founder-avatar-years {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            opacity: 0.3;
+            margin-top: 1rem;
+        }
+
+        .founder-text h3 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .founder-text p {
+            font-size: 0.95rem;
+            color: var(--text-body);
+            line-height: 2;
+            margin-bottom: 1rem;
+        }
+
+        .founder-highlight {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .founder-highlight-item {
+            padding: 1.5rem;
+            background: var(--bg-cream);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .founder-highlight-item .num {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .founder-highlight-item .label {
+            font-size: 0.82rem;
+            color: var(--text-light);
+            margin-top: 0.3rem;
+        }
+
+        /* ===== FAQ ===== */
+        .faq {
+            background: var(--bg-cream);
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .faq-question:hover {
+            color: var(--primary);
+        }
+
+        .faq-toggle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--bg-cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--primary);
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .faq-answer-inner {
+            padding: 0 2rem 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.9;
+        }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            background: linear-gradient(135deg, #3D2B1F, #5C3D2E, #7A5040);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(200,149,108,0.15), transparent 70%);
+            border-radius: 50%;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .cta-section .section-title {
+            color: var(--white);
+        }
+
+        .cta-section .section-desc {
+            color: rgba(255,255,255,0.6);
+            margin: 0 auto 2rem;
+        }
+
+        .cta-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .cta-info-item {
+            text-align: center;
+        }
+
+        .cta-info-item .icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-info-item .label {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .cta-info-item .value {
+            font-size: 1rem;
+            color: var(--white);
+            font-weight: 500;
+            margin-top: 0.2rem;
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            background: #1A1310;
+            padding: 3rem 2rem 1.5rem;
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .footer-brand {
+            max-width: 320px;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.4rem;
+            color: var(--white);
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-brand p {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.4);
+            line-height: 1.8;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 4rem;
+        }
+
+        .footer-links h4 {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.35);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.25);
+        }
+
+        /* ===== 动画 ===== */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, 10px); }
+        }
+
+        /* ===== 滚动动画 ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 1024px) {
+            .hero-title { font-size: 2.8rem; }
+            .tech-grid { grid-template-columns: repeat(2, 1fr); }
+            .process-steps { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+            .process-steps::before { display: none; }
+            .founder-content { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+            .founder-avatar { margin-bottom: 1rem; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-title { font-size: 2.2rem; }
+            .hero-subtitle { font-size: 1rem; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .philosophy-grid { grid-template-columns: 1fr; }
+            .product-showcase { grid-template-columns: 1fr; }
+            .tech-grid { grid-template-columns: 1fr 1fr; }
+            .process-steps { grid-template-columns: 1fr; gap: 1.5rem; }
+            .founder-content { gap: 2rem; }
+            .founder-highlight { grid-template-columns: 1fr; }
+            .compare-table { font-size: 0.78rem; }
+            .compare-table th, .compare-table td { padding: 0.7rem 0.5rem; }
+            .cta-info { flex-direction: column; gap: 1.5rem; }
+            .footer-inner { flex-direction: column; gap: 2rem; }
+            .footer-links { gap: 2rem; flex-wrap: wrap; }
+            .section { padding: 4rem 1.5rem; }
+            .section-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 导航栏 -->
+<nav class="navbar" id="navbar">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">小芙蔢</a>
+        <ul class="nav-links">
+            <li><a href="#philosophy">品牌理念</a></li>
+            <li><a href="#products">核心产品</a></li>
+            <li><a href="#tech">技术优势</a></li>
+            <li><a href="#compare">品牌对比</a></li>
+            <li><a href="#process">服务流程</a></li>
+            <li><a href="#founder">关于我们</a></li>
+            <li><a href="#faq">常见问题</a></li>
+            <li><a href="#contact" class="nav-cta">免费咨询</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">20年美业深耕 · 问题肌管理专家</div>
+        <h1 class="hero-title">分层代谢 <span>养出亮白素颜肌</span></h1>
+        <p class="hero-subtitle">四术一体技术 + 三维五度辨证系统，由内而外修护淡斑，不反弹、不伤肤，敏感肌也能安心变美</p>
+        <div class="hero-buttons">
+            <a href="#contact" class="btn-primary">免费皮肤检测</a>
+            <a href="#products" class="btn-outline">了解产品</a>
+        </div>
+    </div>
+    <div class="hero-scroll">
+        <span>向下探索</span>
+        <span class="arrow"></span>
+    </div>
+</section>
+
+<!-- 品牌理念 -->
+<section class="section philosophy" id="philosophy">
+    <div class="section-inner">
+        <div class="reveal">
+            <span class="section-tag">品牌理念</span>
+            <h2 class="section-title">先修护，再淡斑，标本兼顾</h2>
+            <p class="section-desc">小芙蔢坚信：健康的皮肤屏障是一切美的基础。我们不走"暴力美白"的捷径，而是用科学方法让肌肤从根源恢复透亮。</p>
+        </div>
+        <div class="philosophy-grid">
+            <div class="philo-card reveal">
+                <div class="philo-icon">🧬</div>
+                <h3>分层代谢</h3>
+                <p>不是表面压制黑色素，而是通过四术一体技术，分层激活肌肤自身代谢力，让色素从根源被代谢干净，不易反弹。</p>
+            </div>
+            <div class="philo-card reveal">
+                <div class="philo-icon">🛡️</div>
+                <h3>屏障修护</h3>
+                <p>独家添加白细胞提取物、神经酰胺、积雪草等修护成分，先养好皮肤屏障，再逐步淡斑，敏感肌、激素脸也能安心使用。</p>
+            </div>
+            <div class="philo-card reveal">
+                <div class="philo-icon">📋</div>
+                <h3>精准辨证</h3>
+                <p>独创"三维五度"皮肤辨证系统，针对雀斑、黄褐斑、铅汞斑等不同斑型定制专属方案，一人一方案，拒绝千篇一律。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 核心产品 -->
+<section class="section products" id="products">
+    <div class="section-inner">
+        <div class="reveal">
+            <span class="section-tag">核心产品</span>
+            <h2 class="section-title">专为问题肌打造</h2>
+            <p class="section-desc">门店技术+居家套盒双轨驱动，从深层修护到日常养护，为你提供完整解决方案。</p>
+        </div>
+        <div class="product-showcase">
+            <!-- 祛斑疗程 -->
+            <div class="product-card reveal">
+                <div class="product-visual quban">
+                    <span class="product-visual-text">祛斑</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">门店疗程</span>
+                    <h3>祛斑定制疗程</h3>
+                    <p class="tagline">分层代谢，养出亮白素颜肌</p>
+                    <p>四术一体技术+定制套盒+修护维养三合一，针对色斑、暗沉、敏感等问题肌，7-15天可见明显淡化，顽固色斑2-3个月逐步清理干净。</p>
+                    <ul class="product-features">
+                        <li>四术一体技术</li>
+                        <li>一人一方案</li>
+                        <li>7-15天见效</li>
+                        <li>终身售后维稳</li>
+                        <li>持证功效产品</li>
+                        <li>敏感肌可用</li>
+                    </ul>
+                    <div class="product-price">
+                        <span>按斑型定制报价</span>
+                        <a href="#contact">预约检测</a>
+                    </div>
+                </div>
+            </div>
+            <!-- 大白肌 -->
+            <div class="product-card reveal">
+                <div class="product-visual dabaiji">
+                    <span class="product-visual-text">大白肌</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">居家套盒</span>
+                    <h3>大白肌五件套</h3>
+                    <p class="tagline">28天打造妈生素颜肌</p>
+                    <p>白细胞活力精华水+胶原精华液+舒润精粹乳+光感精华油+净透精华霜，三明治灌肤法，打底+精华+封层，修护淡斑提亮一气呵成。</p>
+                    <ul class="product-features">
+                        <li>白细胞提取物</li>
+                        <li>三型胶原蛋白</li>
+                        <li>神经酰胺修护</li>
+                        <li>以油养肤焕亮</li>
+                        <li>五步叠加灌肤</li>
+                        <li>无激素无重金属</li>
+                    </ul>
+                    <div class="product-price">
+                        <span>¥999/套</span>
+                        <a href="#contact">立即咨询</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 技术优势 -->
+<section class="section tech-section" id="tech">
+    <div class="section-inner">
+        <div class="reveal">
+            <span class="section-tag">技术壁垒</span>
+            <h2 class="section-title">数据说话，效果可验证</h2>
+            <p class="section-desc">每一项承诺都有据可查，每一套方案都有迹可循。</p>
+        </div>
+        <div class="tech-grid">
+            <div class="tech-item reveal">
+                <div class="tech-number">20</div>
+                <div class="tech-label">年美业深耕</div>
+                <div class="tech-desc">创始人凌燕20年专注问题肌管理</div>
+            </div>
+            <div class="tech-item reveal">
+                <div class="tech-number">7-15</div>
+                <div class="tech-label">天可见效果</div>
+                <div class="tech-desc">多数用户7-15天看到明显淡化</div>
+            </div>
+            <div class="tech-item reveal">
+                <div class="tech-number">4</div>
+                <div class="tech-label">术一体技术</div>
+                <div class="tech-desc">独创四术一体分层代谢技术体系</div>
+            </div>
+            <div class="tech-item reveal">
+                <div class="tech-number">0</div>
+                <div class="tech-label">激素/铅汞/荧光剂</div>
+                <div class="tech-desc">全系列国家药监局备案，安全可查</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 品牌对比 -->
+<section class="section compare" id="compare">
+    <div class="section-inner">
+        <div class="reveal">
+            <span class="section-tag">品牌对比</span>
+            <h2 class="section-title">为什么选择小芙蔢</h2>
+            <p class="section-desc">不贬低同行，只讲事实差异。帮你找到真正适合自己的方案。</p>
+        </div>
+        <div class="reveal">
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>对比维度</th>
+                        <th>连锁医美</th>
+                        <th>低价祛斑品牌</th>
+                        <th class="highlight">小芙蔢</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>祛斑原理</td>
+                        <td>激光击碎表层色素</td>
+                        <td>高浓度烟酰胺压制</td>
+                        <td class="highlight">分层代谢+修护同步</td>
+                    </tr>
+                    <tr>
+                        <td>深层斑效果</td>
+                        <td>易反复反弹</td>
+                        <td>几乎无效</td>
+                        <td class="highlight">根源代谢，不易反弹</td>
+                    </tr>
+                    <tr>
+                        <td>皮肤损伤</td>
+                        <td>有创口，易反黑变敏感</td>
+                        <td>可能含激素，风险高</td>
+                        <td class="highlight">温和不伤肤，敏感肌可用</td>
+                    </tr>
+                    <tr>
+                        <td>屏障修护</td>
+                        <td>不修护，只做爆破</td>
+                        <td>不修护</td>
+                        <td class="highlight">白细胞提取物+神经酰胺同步修护</td>
+                    </tr>
+                    <tr>
+                        <td>售后保障</td>
+                        <td>单次结算，无跟踪</td>
+                        <td>承诺夸张，售后无保障</td>
+                        <td class="highlight">一对一终身维稳售后</td>
+                    </tr>
+                    <tr>
+                        <td>产品溯源</td>
+                        <td>正规但价高</td>
+                        <td>真假难辨</td>
+                        <td class="highlight">防伪码+溯源码，药监局备案</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- 服务流程 -->
+<section class="section process" id="process">
+    <div class="section-inner">
+        <div class="reveal">
+            <span class="section-tag">服务流程</span>
+            <h2 class="section-title">五步开启素颜之旅</h2>
+            <p class="section-desc">从检测到维稳，全程专人陪伴，每一步都透明可控。</p>
+        </div>
+        <div class="process-steps reveal">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h4>免费皮肤检测</h4>
+                <p>到店三维五度辨证分析</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h4>定制专属方案</h4>
+                <p>根据斑型肤质量身定制</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h4>签约透明付款</h4>
+                <p>无隐形消费，可分期</p>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <h4>技术操作+居家养护</h4>
+                <p>门店技术+套盒日常养护</p>
+            </div>
+            <div class="step">
+                <div class="step-num">5</div>
+                <h4>终身售后维稳</h4>
+                <p>一对一跟踪，随时答疑</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 创始人 -->
+<section class="section founder" id="founder">
+    <div class="section-inner">
+        <div class="founder-content reveal">
+            <div class="founder-avatar">
+                <div class="founder-avatar-name">凌燕</div>
+                <div class="founder-avatar-title">创始人 / CEO</div>
+                <div class="founder-avatar-years">20年</div>
+            </div>
+            <div class="founder-text">
+                <span class="section-tag">关于我们</span>
+                <h3>20年只做一件事：让问题肌重获健康</h3>
+                <p>我是小芙蔢的创始人凌燕。在美业深耕的20年里，我始终专注于问题性肌肤的协同管理与修复。我和妹妹凌璇共同创立了这个品牌，确立了以代谢美学和细胞修复为核心的技术理念。</p>
+                <p>在商业运营上，我们推崇"四高二轻"（高技术、高复购，轻人工、轻资产）的高效模式，并通过独创的三维五度皮肤辨证系统，帮助众多美业同行和客户精准解决皮肤难题。</p>
+                <div class="founder-highlight">
+                    <div class="founder-highlight-item">
+                        <div class="num">20年</div>
+                        <div class="label">美业深耕</div>
+                    </div>
+                    <div class="founder-highlight-item">
+                        <div class="num">15年</div>
+                        <div class="label">技术沉淀</div>
+                    </div>
+                    <div class="founder-highlight-item">
+                        <div class="num">多家</div>
+                        <div class="label">全国合作门店</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq" id="faq">
+    <div class="section-inner">
+        <div class="reveal">
+            <span class="section-tag">常见问题</span>
+            <h2 class="section-title">你可能想知道的</h2>
+            <p class="section-desc">把客户最关心的问题，一次性说清楚。</p>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item reveal">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>我的斑多久能去掉？多久能看出变化？</span>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">一般7-15天就能看到明显淡化，完整疗程下来，多数斑点1-3个月逐步清理干净。具体时间因斑型、面积、肤质而异，我们会为您定制专属方案并给出合理预期。</div>
+                </div>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>做完会不会反弹？能彻底根除吗？</span>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">根源色素代谢干净就不会反弹，后期简单养护+做好防晒，就能长久维持。我们的核心优势就是"分层代谢+修护同步"，从根源解决问题，而不是表面压制。</div>
+                </div>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>雀斑/黄褐斑/晒斑/铅汞斑都能做干净吗？</span>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">各类斑点都可以改善祛除。我们通过"三维五度"辨证系统，针对不同斑型定制专属方案。无论是雀斑、黄褐斑、晒斑还是铅汞斑，都有对应的解决路径。</div>
+                </div>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>产品安全吗？会不会过敏？</span>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">全系列产品均在国家药监局备案，不含激素、铅汞、荧光剂，检测报告可现场查看。产品添加白细胞提取物、神经酰胺、积雪草等修护成分，温和安全，敏感肌也可使用。建议首次使用前做局部测试。</div>
+                </div>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>你们和雨薇等品牌有什么区别？</span>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">核心区别在于理念和技术路线：小芙蔢先把皮肤屏障养好，再慢慢代谢黑色素，添加修护成分，刺激性极低，敏感肌可用，使用后基本不反黑；而部分品牌主打快速抑黑美白，见效快但敏感肌不推荐，停用后易反复。小芙蔢定位中高端，只走正规授权门店，产品带防伪溯源，享受一对一终身维稳售后。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta-section" id="contact">
+    <div class="section-inner">
+        <div class="reveal">
+            <span class="section-tag">开始变美</span>
+            <h2 class="section-title">你的素颜，值得被认真对待</h2>
+            <p class="section-desc">免费皮肤检测，一对一专属方案，没有套路，只有专业和真诚。</p>
+            <a href="tel:13815162351" class="btn-primary" style="font-size:1.1rem;padding:1.2rem 3rem;">立即预约咨询</a>
+        </div>
+        <div class="cta-info reveal">
+            <div class="cta-info-item">
+                <div class="icon">📞</div>
+                <div class="label">咨询热线</div>
+                <div class="value">138-1516-2351</div>
+            </div>
+            <div class="cta-info-item">
+                <div class="icon">📍</div>
+                <div class="label">品牌总部</div>
+                <div class="value">江苏省句容市崇明东路<br>香溪湾65幢</div>
+            </div>
+            <div class="cta-info-item">
+                <div class="icon">💬</div>
+                <div class="label">微信公众号</div>
+                <div class="value">小芙蔢</div>
+            </div>
+            <div class="cta-info-item">
+                <div class="icon">🎵</div>
+                <div class="label">抖音</div>
+                <div class="value">小芙蔢美容会所官方号</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <h3>小芙蔢</h3>
+            <p>小芙蔢品牌管理（江苏）公司<br>分层代谢，养出亮白素颜肌<br>专注问题肌管理，让每一张脸都能素颜出街</p>
+        </div>
+        <div class="footer-links">
+            <div>
+                <h4>产品服务</h4>
+                <ul>
+                    <li><a href="#products">祛斑定制疗程</a></li>
+                    <li><a href="#products">大白肌五件套</a></li>
+                    <li><a href="#process">服务流程</a></li>
+                    <li><a href="#faq">常见问题</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>关于品牌</h4>
+                <ul>
+                    <li><a href="#philosophy">品牌理念</a></li>
+                    <li><a href="#tech">技术优势</a></li>
+                    <li><a href="#founder">创始人故事</a></li>
+                    <li><a href="#compare">品牌对比</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>联系我们</h4>
+                <ul>
+                    <li><a href="tel:13815162351">138-1516-2351</a></li>
+                    <li><a href="#">微信公众号：小芙蔢</a></li>
+                    <li><a href="#">抖音：小芙蔢美容会所</a></li>
+                    <li><a href="#contact">预约皮肤检测</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 小芙蔢品牌管理（江苏）公司 · 保留所有权利</p>
+        <p>统一社会信用代码：91321183MAKBL7LY9P</p>
+    </div>
+</footer>
+
+<script>
+    // 导航栏滚动效果
+    window.addEventListener('scroll', () => {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 80) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // 滚动显示动画
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // FAQ 手风琴
+    function toggleFaq(el) {
+        const item = el.parentElement;
+        const answer = item.querySelector('.faq-answer');
+        const isActive = item.classList.contains('active');
+
+        // 关闭所有
+        document.querySelectorAll('.faq-item').forEach(i => {
+            i.classList.remove('active');
+            i.querySelector('.faq-answer').style.maxHeight = '0';
+        });
+
+        // 如果不是当前打开的，则打开
+        if (!isActive) {
+            item.classList.add('active');
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+    }
+
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
